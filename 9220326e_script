@@ -7,4 +7,4 @@ puppet resource file /tmp/9220326e/research ensure=absent force=true
 puppet resource file /tmp/9220326e/research ensure=directory
 cd /tmp/9220326e/research
 git clone https://github.com/stephaniechansddo/9220326e_op_repo.git
-
+cp -p /tmp/9220326e/research/9220326e_op_repo/9220326e_index.html /var/www/html

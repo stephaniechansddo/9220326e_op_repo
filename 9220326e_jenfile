@@ -85,17 +85,21 @@ pipeline {
 
                     if grep -q "HTTP/1.1 200 OK" /tmp/prodsvr-result-file; then
                         echo "9220326e_OP_S7: Production website is operational"
-                    else 
+                    else
                         echo "9220326e_OP_S7: Production website test failed"
 
+                        # Prompt the user to choose between rollback and troubleshooting
                         choice=$(echo "Trigger roll back\nTroubleshooting" | \
                             /usr/bin/printf "Choose an option: " && \
                             read choice && echo $choice)
 
-                        if [ "$choice" == "Trigger roll back" ];
+                        if [ "$choice" == "Trigger roll back" ]; then
                             echo "9220326e_OP_S7: Production website is rolling back"
-                        else [ "$choice" == "Troubleshooting" ];
+                        elif [ "$choice" == "Troubleshooting" ]; then
                             echo "9220326e_OP_S7: Troubleshooting of Production website in progress"
+                        else
+                            echo "Invalid choice. Exiting."
+                            exit 1
                         fi
                     fi
                 '''

@@ -16,13 +16,13 @@ pipeline {
 
         stage('Stage 3: 9220326e-opr-s3') {
             steps {
-                echo 'AAA'
+                input('9220326e_OP_S3: Proceed stress test uat web server?')   
             }
         }
 
         stage('Stage 4: 9220326e-opr-s4') {
             steps {
-                echo 'AAAA'
+                echo '9220326e_OP_S4: Stress test result is good'
             }
         }
 

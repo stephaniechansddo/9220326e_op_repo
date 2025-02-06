@@ -92,9 +92,9 @@ pipeline {
                             /usr/bin/printf "Choose an option: " && \
                             read choice && echo $choice)
 
-                        if [ "$choice" == "Trigger roll back" ]; then
+                        if [ "$choice" == "Trigger roll back" ];
                             echo "9220326e_OP_S7: Production website is rolling back"
-                        else [ "$choice" == "Troubleshooting" ]; then
+                        else [ "$choice" == "Troubleshooting" ];
                             echo "9220326e_OP_S7: Troubleshooting of Production website in progress"
                         fi
                     fi

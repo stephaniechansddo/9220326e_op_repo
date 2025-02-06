@@ -6,7 +6,6 @@ pipeline {
             steps {    
                 echo 'removing old backup image of uatsvr_image and creating a new one...'
                 sh '''
-                    sudo docker rm -f uatsvr_image || true
                     sudo docker commit 9220326e_uatsvr uatsvr_image
                 '''
 

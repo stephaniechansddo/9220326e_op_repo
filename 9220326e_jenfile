@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    
-    stages {
-pipeline {
-    agent any
 
     stages {
         stage('Stage 1: 9220326e-opr-s1') {

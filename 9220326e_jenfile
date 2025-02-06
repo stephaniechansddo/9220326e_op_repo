@@ -25,8 +25,6 @@ pipeline {
                 echo '9220326e_OP_S1: UAT web server is backed up and updated.'
             }
         }
-    }
-}
 
         stage('Stage 2: 9220326e-opr-s2') {
             steps {

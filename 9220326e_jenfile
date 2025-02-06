@@ -1,4 +1,7 @@
-9220326e_jenfile:
+pipeline {
+    agent any
+
+    stages {
         stage('Stage 1: 9220326e-opr-s1') {
             steps {    
                 echo 'removing old backup image of uatsvr_image and creating a new one...'

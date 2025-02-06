@@ -4,22 +4,21 @@ pipeline {
     stages {
         stage('Stage 1: 9220326e-opr-s1') {
             steps {    
-                echo 'removing old backup image of uatsvr_image and creating a new one...'
+                echo 'Removing old backup image of uatsvr_image and creating a new one...'
                 sh '''
-                    sudo docker image rm -f uatsvr_image
+                    sudo docker image rm -f uatsvr_image || true
                     sudo docker commit 9220326e_uatsvr uatsvr_image
                 '''
 
+                echo 'Running Bolt script on UAT server...'
                 sh '''
-                    puppet resource file /tmp/9220326e/research ensure=absent force=true;
-                    puppet resource file /tmp/9220326e/research ensure=directory;
-                    cd /tmp/9220326e/research;
-                    git clone https://github.com/stephaniechansddo/9220326e_op_repo.git;
-                    targets=9220326e_uatsvr.localdomain;
-                    locate_script='/tmp/9220326e/research/9220326e_op_repo/9220326e_script';
-                    bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
+                    targets=uatsvr.localdomain
+                    locate_script='/tmp/9220326e/research/9220326e_op_repo/9220326e_script'
+                    
+                    # Run Bolt on the target
+                    bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root
                 '''
-                echo '9220326e_OP_S1: uat web server is backup and updated'
+                echo '9220326e_OP_S1: UAT web server is backed up and updated.'
             }
         }
 

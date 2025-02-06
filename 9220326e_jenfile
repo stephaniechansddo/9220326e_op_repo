@@ -1,1 +1,41 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Stage 1: 9220326e-opr-s1') {
+            steps {
+                echo '9220326e_OP_S1: uat web server is backup and updated'
+            }
+        }
 
+        stage('Stage 2: 9220326e-opr-s2') {
+            steps {
+            }
+        }
+
+        stage('Stage 3: 9220326e-opr-s3') {
+            steps {
+            }
+        }
+
+        stage('Stage 4: 9220326e-opr-s4') {
+            steps {
+            }
+        }
+
+        stage('Stage 5: 9220326e-opr-s5') {
+            steps {
+            }
+        }
+
+        stage('Stage 6: 9220326e-opr-s6') {
+            steps {
+            }
+        }
+
+        stage('Stage 7: 9220326e-opr-s7') {
+            steps {
+            }
+        }
+    }
+}

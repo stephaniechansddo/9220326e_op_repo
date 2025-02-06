@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Stage 1: 9220326e-opr-s1') {
+        stage('Stage 1: 9220326e-OP-S1') {
             steps {    
                 echo 'removing old backup image of uatsvr_image and creating a new one...'
                 sh '''
@@ -23,44 +23,54 @@ pipeline {
             }
         }
 
-        stage('Stage 2: 9220326e-opr-s2') {
+        stage('Stage 2: 9220326e-OP-S2') {
             steps {
                 echo 'AA'
             }
         }
 
-        stage('Stage 3: 9220326e-opr-s3') {
+        stage('Stage 3: 9220326e-OP-S3') {
             steps {
                 echo '9220326e_OP_S3: Proceed stress test uat web server?'
                 input('Proceed with stress test on uat web server or Abort (for uat svr fails)?')   
             }
         }
 
-        stage('Stage 4: 9220326e-opr-s4') {
+        stage('Stage 4: 9220326e-OP-S4') {
             steps {
                 echo '9220326e_OP_S4: Stress test result is good'
             }
         }
 
-        stage('Stage 5: 9220326e-opr-s5') {
+        stage('Stage 5: 9220326e-OP-S5') {
             steps {
                 echo '9220326e_OP_S5: Deploy new update to prod web server?'
                 input('Proceed to update prod web server or Abort (for stress test fails)?')
             }
         }
 
-        stage('Stage 6: 9220326e-opr-s6') {
+        stage('Stage 6: 9220326e-OP-S6') {
             steps {
                 echo 'removing old backup image of prodsvr_image and creating a new one...'
                 sh '''
                     sudo docker image rm -f prodsvr_image
                     sudo docker commit 9220326e_prodsvr prodsvr_image
                 '''
+
+                sh '''
+                    puppet resource file /tmp/9220326e/research ensure=absent force=true;
+                    puppet resource file /tmp/9220326e/research ensure=directory;
+                    cd /tmp/9220326e/research;
+                    git clone https://github.com/stephaniechansddo/9220326e_op_repo.git;
+                    targets=9220326e_prodsvr.localdomain;
+                    locate_script='/tmp/9220326e/research/9220326e_op_repo/9220326e_script';
+                    bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
+                '''
                 echo '9220326E_OP_S6: prod web server is backup and updated'
             }
         }
 
-        stage('Stage 7: 9220326e-opr-s7') {
+        stage('Stage 7: 9220326e-OP-S7') {
             steps {
                 echo 'AAAAAAA'
             }

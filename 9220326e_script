@@ -1,10 +1,20 @@
 #!/bin/bash
+
+# Update package lists and ensure required packages are present
 apt-get update
 puppet resource package git ensure=present
 puppet resource package apache2 ensure=present
-puppet resource service apache2 ensure=running
+
+# Ensure Apache is running
+puppet resource service apache2 ensure=running enable=true
+
+# Clean up and recreate the research directory
 puppet resource file /tmp/9220326e/research ensure=absent force=true
 puppet resource file /tmp/9220326e/research ensure=directory
+
+# Clone the GitHub repo
 cd /tmp/9220326e/research
 git clone https://github.com/stephaniechansddo/9220326e_op_repo.git
-cp -p /tmp/9220326e/research/9220326e_op_repo/9220326e_index.html /var/www/html
+
+# Replace index.html
+puppet resource file /var/www/html/index.html ensure=present source=/tmp/9220326e/research/9220326e_op_repo/9220326e_index.html mode=0644

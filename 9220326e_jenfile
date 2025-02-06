@@ -26,7 +26,7 @@ pipeline {
         stage('Stage 2: 9220326e-OP-S2') {
             steps {
                 sh '''
-                    curl -Is http://9220326e-uatsvr.localdomain | head -n 1 > /tmp/uatsvr-result-file
+                    curl -Is http://localhost:32500 | head -n 1 > /tmp/uatsvr-result-file
 
                     if grep -q "HTTP/1.1 200 OK" /tmp/uatsvr-result-file; then
                         echo "9220326e_OP_S2: uat svr is running"
@@ -82,7 +82,7 @@ pipeline {
             steps {
                 script {
                     def curlResult = sh(script: '''
-                        curl -Is http://9220326e-prodsvr.localdomain | head -n 1 > /tmp/prodsvr-result-file
+                        curl -Is http://localhost:32600 | head -n 1 > /tmp/prodsvr-result-file
                         if grep -q "HTTP/1.1 200 OK" /tmp/prodsvr-result-file; then
                             echo "success"
                         else

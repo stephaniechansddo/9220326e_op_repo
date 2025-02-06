@@ -16,7 +16,8 @@ pipeline {
 
         stage('Stage 3: 9220326e-opr-s3') {
             steps {
-                input('9220326e_OP_S3: Proceed stress test uat web server?')   
+                echo '9220326e_OP_S3: Proceed stress test uat web server?'
+                input('Proceed with stress test on uat web server or Abort (for uat svr fails)?')   
             }
         }
 
@@ -28,13 +29,14 @@ pipeline {
 
         stage('Stage 5: 9220326e-opr-s5') {
             steps {
-                echo 'AAAAA'
+                echo '9220326e_OP_S5: Deploy new update to prod web server?'
+                input('Proceed to update prod web server or Abort (for stress test fails)?')
             }
         }
 
         stage('Stage 6: 9220326e-opr-s6') {
             steps {
-                echo 'AAAAAA'
+                echo '9220326E_OP_S6: prod web server is backup and updated'
             }
         }
 

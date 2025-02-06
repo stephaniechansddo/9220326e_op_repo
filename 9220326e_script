@@ -18,3 +18,4 @@ git clone https://github.com/stephaniechansddo/9220326e_op_repo.git
 
 # Replace index.html
 puppet resource file /var/www/html/index.html ensure=present source=/tmp/9220326e/research/9220326e_op_repo/9220326e_index.html mode=0644
+mv /var/www/html/9220326e_index.html /var/www/html/index.html

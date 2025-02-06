@@ -12,7 +12,7 @@ pipeline {
 
                 echo 'Running Bolt script on UAT server...'
                 sh '''
-                    targets=uatsvr.localdomain
+                    targets=9220326e_uatsvr.localdomain
                     locate_script='/tmp/9220326e/research/9220326e_op_repo/9220326e_script'
                     
                     # Run Bolt on the target

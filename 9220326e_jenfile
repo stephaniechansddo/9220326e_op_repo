@@ -10,7 +10,7 @@ pipeline {
                     sudo docker commit 9220326e_uatsvr uatsvr_image
                 '''
 
-                sh '''#!/bin/bash
+                sh '''
                     sudo puppet resource file /tmp/9220326e/research ensure=absent force=true;
                     sudo puppet resource file /tmp/9220326e/research ensure=directory;
                     sudo cd /tmp/9220326e/research;

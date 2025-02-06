@@ -78,33 +78,34 @@ pipeline {
             }
         }
 
-    stage('Stage 7: 9220326e-OP-S7') {
-        steps {
-            script {
-                def curlResult = sh(script: '''
-                    curl -Is http://9220326e-prodsvr.localdomain | head -n 1 > /tmp/prodsvr-result-file
-                    if grep -q "HTTP/1.1 200 OK" /tmp/prodsvr-result-file; then
-                        echo "success"
-                    else
-                        echo "failure"
-                    fi
-                ''', returnStdout: true).trim()
-    
-                if (curlResult == "success") {
-                    echo "9220326e_OP_S7: Production website is operational"
-                } else {
-                    echo "9220326e_OP_S7: Production website test failed"
-                    
-                    // Prompt user through Jenkins input() to choose next action
-                    def userChoice = input message: 'Select an action for the failed production website:',
-                                       parameters: [
-                                           choice(name: 'Action', choices: 'Trigger roll back\nTroubleshooting', description: 'Choose an option:')
-                                       ]
-    
-                    if (userChoice == 'Trigger roll back') {
-                        echo "9220326e_OP_S7: Production website is rolling back"
-                    } else if (userChoice == 'Troubleshooting') {
-                        echo "9220326e_OP_S7: Troubleshooting of Production website in progress"
+        stage('Stage 7: 9220326e-OP-S7') {
+            steps {
+                script {
+                    def curlResult = sh(script: '''
+                        curl -Is http://9220326e-prodsvr.localdomain | head -n 1 > /tmp/prodsvr-result-file
+                        if grep -q "HTTP/1.1 200 OK" /tmp/prodsvr-result-file; then
+                            echo "success"
+                        else
+                            echo "failure"
+                        fi
+                    ''', returnStdout: true).trim()
+        
+                    if (curlResult == "success") {
+                        echo "9220326e_OP_S7: Production website is operational"
+                    } else {
+                        echo "9220326e_OP_S7: Production website test failed"
+                        
+                        // Prompt user through Jenkins input() to choose next action
+                        def userChoice = input message: 'Select an action for the failed production website:',
+                                           parameters: [
+                                               choice(name: 'Action', choices: 'Trigger roll back\nTroubleshooting', description: 'Choose an option:')
+                                           ]
+        
+                        if (userChoice == 'Trigger roll back') {
+                            echo "9220326e_OP_S7: Production website is rolling back"
+                        } else if (userChoice == 'Troubleshooting') {
+                            echo "9220326e_OP_S7: Troubleshooting of Production website in progress"
+                        }
                     }
                 }
             }

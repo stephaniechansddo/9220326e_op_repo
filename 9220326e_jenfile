@@ -42,6 +42,11 @@ pipeline {
 
         stage('Stage 6: 9220326e-opr-s6') {
             steps {
+                echo 'removing old backup image of prodsvr_image and creating a new one...'
+                sh '''
+                    sudo docker image rm -f prodsvr_image
+                    sudo docker commit 9220326e_prodsvr prodsvr_image
+                '''
                 echo '9220326E_OP_S6: prod web server is backup and updated'
             }
         }

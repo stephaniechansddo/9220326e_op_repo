@@ -6,7 +6,7 @@ pipeline {
             steps {    
                 echo 'removing old backup image of uatsvr_image and creating a new one...'
                 sh '''
-                    docker commit 9220326e_uatsvr uatsvr_image
+                    sudo docker commit 9220326e_uatsvr uatsvr_image
                 '''
 
                 echo '9220326e_OP_S1: uat web server is backup and updated'

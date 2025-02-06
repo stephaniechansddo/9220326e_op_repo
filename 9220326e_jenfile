@@ -25,7 +25,15 @@ pipeline {
 
         stage('Stage 2: 9220326e-OP-S2') {
             steps {
-                echo 'AA'
+                sh '''
+                    curl -Is http://9220326e-uatsvr.localdomain | head -n 1 > /tmp/uatsvr-result_file
+
+                    if grep -q "HTTP/1.1 200 OK" /tmp/uatsvr-result-file; then
+                        echo "9220326e_OP_S2: uat svr is running"
+                    else 
+                        echo "9220326e_OP_S2: uat svr fails"
+                    fi
+                '''
             }
         }
 
@@ -72,7 +80,15 @@ pipeline {
 
         stage('Stage 7: 9220326e-OP-S7') {
             steps {
-                echo 'AAAAAAA'
+                sh '''
+                    curl -Is http://9220326e-prodsvr.localdomain | head -n 1 > /tmp/prodsvr-result_file
+
+                    if grep -q "HTTP/1.1 200 OK" /tmp/prodsvr-result-file; then
+                        echo "9220326e_OP_S7: Production website is operational"
+                    else 
+                        echo "TRYING SMTH"
+                    fi
+                '''
             }
         }
     }

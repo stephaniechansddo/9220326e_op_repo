@@ -10,31 +10,37 @@ pipeline {
 
         stage('Stage 2: 9220326e-opr-s2') {
             steps {
+                echo 'AA'
             }
         }
 
         stage('Stage 3: 9220326e-opr-s3') {
             steps {
+                echo 'AAA'
             }
         }
 
         stage('Stage 4: 9220326e-opr-s4') {
             steps {
+                echo 'AAAA'
             }
         }
 
         stage('Stage 5: 9220326e-opr-s5') {
             steps {
+                echo 'AAAAA'
             }
         }
 
         stage('Stage 6: 9220326e-opr-s6') {
             steps {
+                echo 'AAAAAA'
             }
         }
 
         stage('Stage 7: 9220326e-opr-s7') {
             steps {
+                echo 'AAAAAAA'
             }
         }
     }

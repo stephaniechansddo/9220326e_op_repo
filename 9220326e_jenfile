@@ -11,13 +11,13 @@ pipeline {
                 '''
 
                 sh '''#!/bin/bash
-                    puppet resource file /tmp/9220326e/research ensure=absent force=true;
-                    puppet resource file /tmp/9220326e/research ensure=directory;
-                    cd /tmp/9220326e/research;
-                    git clone https://github.com/stephaniechansddo/9220326e_op_repo.git;
-                    targets=uatsvr.localdomain;
-                    locate_script='/tmp/9220326e/research/9220326e_op_repo/9220326e_script';
-                    bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
+                    sudo puppet resource file /tmp/9220326e/research ensure=absent force=true;
+                    sudo puppet resource file /tmp/9220326e/research ensure=directory;
+                    sudo cd /tmp/9220326e/research;
+                    sudo git clone https://github.com/stephaniechansddo/9220326e_op_repo.git;
+                    sudo targets=uatsvr.localdomain;
+                    sudo locate_script='/tmp/9220326e/research/9220326e_op_repo/9220326e_script';
+                    sudo bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
                 '''
                 echo '9220326e_OP_S1: uat web server is backup and updated'
             }
